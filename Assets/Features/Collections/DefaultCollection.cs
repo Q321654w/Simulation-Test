@@ -1,24 +1,22 @@
 ﻿using System.Collections.Generic;
 using Features.Interfaces;
+using Features.Predicates;
 
-namespace Features.Cubes
+namespace Features.Collections
 {
-    public class DefaultCollection<T> : IPredicateCollection<T, T>, IIterate<T>, Interfaces.ICollection<T>
+    public class DefaultCollection<T> : IPredicateCollection<T, T>, IIterate<T>, ICollection<T>
     {
         private readonly List<T> _elements;
         private readonly IDefault<T> _default;
-        private readonly IPredicate<T> _predicate;
 
-        public DefaultCollection(IDefault<T> defaultValue, IPredicate<T> predicate) : this(new List<T>(), defaultValue,
-            predicate)
+        public DefaultCollection(IDefault<T> defaultValue) : this(new List<T>(), defaultValue)
         {
         }
 
-        public DefaultCollection(List<T> elements, IDefault<T> defaultValue, IPredicate<T> predicate)
+        public DefaultCollection(List<T> elements, IDefault<T> defaultValue)
         {
             _elements = elements;
             _default = defaultValue;
-            _predicate = predicate;
         }
 
         public int Count()
@@ -26,12 +24,12 @@ namespace Features.Cubes
             return _elements.Count;
         }
 
-        public ElementStatus<T> Element(T content)
+        public ElementStatus<T> Element(IPredicate<T> predicate)
         {
             for (int index = 0; index < _elements.Count; index++)
             {
                 var element = _elements[index];
-                if (_predicate.Execute(element, content))
+                if (predicate.Execute(element))
                     return new ElementStatus<T>(true, element);
             }
 

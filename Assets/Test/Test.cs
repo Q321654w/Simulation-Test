@@ -1,9 +1,10 @@
+using Features.Collections;
 using Features.Cubes;
 using Features.Interfaces;
 using Features.Simulation;
 using UnityEngine;
 
-namespace Features
+namespace Test
 {
     public class Test : MonoBehaviour
     {
@@ -16,10 +17,10 @@ namespace Features
 
         private void Start()
         {
-            _cubes = new DefaultCollection<Cube>(new DefaultCube(),new CubePredicate());
+            _cubes = new DefaultCollection<Cube>(new DefaultCube());
             var cubeFactory = new CubeFactory(_min, _max, _cubes);
             _factory = new CubeProxy(cubeFactory, _cubes);
-            _simulation = new UpdateSimulation<IUpdate>(_cubes);
+            _simulation = new UpdateSimulation<IUpdate>(_cubes, new Stopwatch());
         }
 
         private void Update()

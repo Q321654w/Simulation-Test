@@ -1,4 +1,4 @@
-﻿namespace Features.Interfaces
+﻿namespace Features.Collections
 {
     public interface ICollection<T>
     {

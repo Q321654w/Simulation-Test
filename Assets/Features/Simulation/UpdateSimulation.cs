@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Features.Collections;
 using Features.Interfaces;
 
 namespace Features.Simulation
@@ -6,28 +6,22 @@ namespace Features.Simulation
     public class UpdateSimulation<T> : ISimulation where T : IUpdate
     {
         private readonly IIterate<T> _iterate;
-        private DateTime _lastUpdateTime;
+        private readonly Stopwatch _stopwatch;
 
-        public UpdateSimulation(IIterate<T> iterate)
+        public UpdateSimulation(IIterate<T> iterate, Stopwatch stopwatch)
         {
             _iterate = iterate;
-            _lastUpdateTime = DateTime.Now;
+            _stopwatch = stopwatch;
         }
 
         public void Simulate()
         {
-            var currentTime = DateTime.Now;
-            var deltaTime = currentTime - _lastUpdateTime;
-            var elapsedMilliseconds = deltaTime.Milliseconds;
+            _stopwatch.Update();
 
             for (var index = 0; index < _iterate.Count(); index++)
             {
-                var element = _iterate.Element(index);
-                if (element.Status())
-                    element.ExecuteFrame(elapsedMilliseconds);
+                _iterate.Element(index);
             }
-
-            _lastUpdateTime = currentTime;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Features.Interfaces;
+﻿using Features.Collections;
+using Features.Interfaces;
 
 namespace Features.Cubes
 {

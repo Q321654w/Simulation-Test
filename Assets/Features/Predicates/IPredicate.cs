@@ -1,7 +1,7 @@
-﻿namespace Features.Interfaces
+﻿namespace Features.Predicates
 {
     public interface IPredicate<T>
     {
-        bool Execute(T first, T second);
+        bool Execute(T content);
     }
 }

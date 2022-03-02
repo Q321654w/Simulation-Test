@@ -1,4 +1,4 @@
-﻿namespace Features
+﻿namespace Features.Collections
 {
     public readonly struct ElementStatus<T>
     {

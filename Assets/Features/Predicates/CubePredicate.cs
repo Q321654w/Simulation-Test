@@ -1,13 +1,20 @@
 ﻿using Features.Cubes;
 using Features.Interfaces;
 
-namespace Features
+namespace Features.Predicates
 {
     internal class CubePredicate : IPredicate<Cube>
     {
-        public bool Execute(Cube first, Cube second)
+        private readonly Cube _cube;
+
+        public CubePredicate(Cube cube)
         {
-            return first.Status() && second.Status() && first.Equals(second);
+            _cube = cube;
+        }
+
+        public bool Execute(Cube content)
+        {
+            return _cube.Equals(content);
         }
     }
 }

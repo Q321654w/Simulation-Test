@@ -1,7 +1,9 @@
-﻿namespace Features.Interfaces
+﻿using Features.Predicates;
+
+namespace Features.Collections
 {
     public interface IPredicateCollection<T, U>
     {
-        ElementStatus<T> Element(U content);
+        ElementStatus<T> Element(IPredicate<U> predicate);
     }
 }
