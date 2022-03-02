@@ -1,13 +1,11 @@
 ﻿using Features.Collections;
 using Features.Interfaces;
-using Features.Predicates;
 
 namespace Features.Cubes
 {
     public class Cube : IUpdate, IEquals<Cube>
     {
         private readonly IPredicateCollection<Cube, Cube> _predicateCollection;
-        private readonly IPredicate<Cube> _predicate;
 
         private int _value;
         private bool _inactive;
@@ -17,7 +15,11 @@ namespace Features.Cubes
             _inactive = false;
             _value = value;
             _predicateCollection = predicateCollection;
-            _predicate = new CubePredicate(this);
+        }
+
+        public bool Inactive()
+        {
+            return _inactive;
         }
 
         public void ExecuteFrame()
@@ -25,7 +27,7 @@ namespace Features.Cubes
             if (_inactive)
                 return;
 
-            var status = _predicateCollection.Element(_predicate);
+            var status = _predicateCollection.Element(new CubeEquals(this));
             if (status.Success)
                 AttractWith(status.Element);
         }
@@ -43,7 +45,7 @@ namespace Features.Cubes
 
         public bool Equals(Cube content)
         {
-            return _value == content._value && _inactive == content._inactive;
+            return _value == content._value && _inactive ;
         }
 
         public override string ToString()

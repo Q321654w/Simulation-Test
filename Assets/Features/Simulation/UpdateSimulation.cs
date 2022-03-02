@@ -1,4 +1,5 @@
 ﻿using Features.Collections;
+using Features.Cubes;
 using Features.Interfaces;
 
 namespace Features.Simulation

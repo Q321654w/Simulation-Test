@@ -1,4 +1,6 @@
-﻿namespace Features.Interfaces
+﻿using Features.Predicates;
+
+namespace Features.Interfaces
 {
     public interface IEquals<T>
     {

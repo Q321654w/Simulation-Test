@@ -33,7 +33,7 @@ namespace Features.Collections
                     return new ElementStatus<T>(true, element);
             }
 
-            return new ElementStatus<T>(true, _default.Value());
+            return new ElementStatus<T>(false, _default.Value());
         }
 
         public T Element(int index)
