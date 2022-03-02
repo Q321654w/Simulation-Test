@@ -1,6 +1,6 @@
-﻿using Features.Predicates;
+﻿using Features.Cubes;
 
-namespace Features.Cubes
+namespace Features.Predicates
 {
     public readonly struct CubeEquals : IPredicate<Cube>
     {

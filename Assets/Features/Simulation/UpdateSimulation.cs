@@ -1,5 +1,5 @@
 ﻿using Features.Collections;
-using Features.Cubes;
+using Features.Common;
 using Features.Interfaces;
 
 namespace Features.Simulation
@@ -7,9 +7,9 @@ namespace Features.Simulation
     public class UpdateSimulation<T> : ISimulation where T : IUpdate
     {
         private readonly IIterate<T> _iterate;
-        private readonly Stopwatch _stopwatch;
+        private readonly DeltaTime _stopwatch;
 
-        public UpdateSimulation(IIterate<T> iterate, Stopwatch stopwatch)
+        public UpdateSimulation(IIterate<T> iterate, DeltaTime stopwatch)
         {
             _iterate = iterate;
             _stopwatch = stopwatch;

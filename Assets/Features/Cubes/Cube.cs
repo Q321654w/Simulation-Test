@@ -1,5 +1,6 @@
 ﻿using Features.Collections;
 using Features.Interfaces;
+using Features.Predicates;
 
 namespace Features.Cubes
 {
@@ -29,10 +30,10 @@ namespace Features.Cubes
 
             var status = _predicateCollection.Element(new CubeEquals(this));
             if (status.Success)
-                AttractWith(status.Element);
+                InteractWith(status.Element);
         }
 
-        private void AttractWith(Cube cube)
+        private void InteractWith(Cube cube)
         {
             _inactive = true;
             cube.Merge(this);

@@ -2,27 +2,26 @@
 
 namespace Features.Common
 {
-    public class Stopwatch
+    public class DeltaTime
     {
         private DateTime _lastUpdateTime;
-        private DateTime _elapsedTime;
+        private TimeSpan _deltaTime;
 
-        public Stopwatch()
+        public DeltaTime()
         {
             _lastUpdateTime = DateTime.Now;
         }
 
-        public DateTime ElapsedTime()
+        public TimeSpan Span()
         {
-            return _elapsedTime;
+            return _deltaTime;
         }
 
         public void Update()
         {
             var currentTime = DateTime.Now;
-            var deltaTime = currentTime - _lastUpdateTime;
+            _deltaTime = currentTime - _lastUpdateTime;
 
-            _elapsedTime += deltaTime;
             _lastUpdateTime = currentTime;
         }
     }
