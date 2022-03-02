@@ -21,7 +21,7 @@ namespace Test
             _cubes = new DefaultCollection<Cube>(new DefaultCube());
             var cubeFactory = new CubeFactory(_min, _max, _cubes);
             _factory = new CubeProxy(cubeFactory, _cubes);
-            _simulation = new UpdateSimulation<IUpdate>(_cubes, new Stopwatch());
+            _simulation = new UpdateSimulation<IUpdate>(_cubes, new DeltaTime());
         }
 
         private void Update()

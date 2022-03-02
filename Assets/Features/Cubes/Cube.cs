@@ -46,7 +46,7 @@ namespace Features.Cubes
 
         public bool Equals(Cube content)
         {
-            return _value == content._value && _inactive ;
+            return _value == content._value;
         }
 
         public override string ToString()
