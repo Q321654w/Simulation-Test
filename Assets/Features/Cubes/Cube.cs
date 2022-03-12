@@ -6,12 +6,12 @@ namespace Features.Cubes
 {
     public class Cube : IUpdate, IEquals<Cube>
     {
-        private readonly IPredicateCollection<Cube, Cube> _predicateCollection;
+        private readonly ICollection<Cube, Cube> _predicateCollection;
 
         private int _value;
         private bool _inactive;
 
-        public Cube(int value, IPredicateCollection<Cube, Cube> predicateCollection)
+        public Cube(int value, ICollection<Cube, Cube> predicateCollection)
         {
             _inactive = false;
             _value = value;

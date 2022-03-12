@@ -1,7 +1,10 @@
-﻿namespace Features.Collections
+﻿using Features.Predicates;
+
+namespace Features.Collections
 {
-    public interface ICollection<T>
+    public interface ICollection<T, U>
     {
-        void With(T content);
+        Result<T> Element(IPredicate<U> predicate);
+        ICollection<T, U> With(T content);
     }
 }

@@ -6,9 +6,9 @@ namespace Features.Cubes
     public class CubeProxy : IFactory<Cube>
     {
         private readonly IFactory<Cube> _factory;
-        private readonly ICollection<Cube> _collection;
+        private ICollection<Cube, Cube> _collection;
 
-        public CubeProxy(IFactory<Cube> factory, ICollection<Cube> collection)
+        public CubeProxy(IFactory<Cube> factory, ICollection<Cube, Cube> collection)
         {
             _factory = factory;
             _collection = collection;
@@ -17,7 +17,7 @@ namespace Features.Cubes
         public Cube Create()
         {
             var cube = _factory.Create();
-            _collection.With(cube);
+            _collection = _collection.With(cube);
             return cube;
         }
     }

@@ -1,11 +1,11 @@
 ﻿namespace Features.Collections
 {
-    public readonly struct ElementStatus<T>
+    public readonly struct Result<T>
     {
         private readonly bool _success;
         private readonly T _element;
 
-        public ElementStatus(bool success, T element)
+        public Result(bool success, T element)
         {
             _success = success;
             _element = element;

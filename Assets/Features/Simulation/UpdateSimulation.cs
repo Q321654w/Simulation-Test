@@ -7,17 +7,17 @@ namespace Features.Simulation
     public class UpdateSimulation<T> : ISimulation where T : IUpdate
     {
         private readonly IIterate<T> _iterate;
-        private readonly DeltaTime _stopwatch;
+        private readonly DeltaTime _deltaTime;
 
-        public UpdateSimulation(IIterate<T> iterate, DeltaTime stopwatch)
+        public UpdateSimulation(IIterate<T> iterate, DeltaTime deltaTime)
         {
             _iterate = iterate;
-            _stopwatch = stopwatch;
+            _deltaTime = deltaTime;
         }
 
         public void Simulate()
         {
-            _stopwatch.Update();
+            _deltaTime.Update();
 
             for (var index = 0; index < _iterate.Count(); index++)
             {

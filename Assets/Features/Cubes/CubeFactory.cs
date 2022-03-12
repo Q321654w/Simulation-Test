@@ -6,11 +6,11 @@ namespace Features.Cubes
 {
     public class CubeFactory : IFactory<Cube>
     {
-        private readonly IPredicateCollection<Cube, Cube> _collection;
+        private readonly ICollection<Cube, Cube> _collection;
         private readonly int _min;
         private readonly int _max;
 
-        public CubeFactory(int min, int max, IPredicateCollection<Cube, Cube> collection)
+        public CubeFactory(int min, int max, ICollection<Cube, Cube> collection)
         {
             _min = min;
             _max = max;

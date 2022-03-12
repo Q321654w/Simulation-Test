@@ -1,6 +1,6 @@
 ﻿namespace Features.Interfaces
 {
-    public interface IDefault<T>
+    public interface IDefault<out T>
     {
         T Value();
     }
