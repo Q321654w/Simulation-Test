@@ -1,21 +1,23 @@
-﻿using Features.Collections;
+﻿using Collections;
 using Features.Interfaces;
 using Features.Predicates;
+using Predicate.WithParameter;
+using Update;
 
 namespace Features.Cubes
 {
     public class Cube : IUpdate, IEquals<Cube>
     {
-        private readonly ICollection<Cube, Cube> _predicateCollection;
+        private readonly ICollection<Cube, Cube> _collection;
 
         private int _value;
         private bool _inactive;
 
-        public Cube(int value, ICollection<Cube, Cube> predicateCollection)
+        public Cube(int value, ICollection<Cube, Cube> collection)
         {
             _inactive = false;
             _value = value;
-            _predicateCollection = predicateCollection;
+            _collection = collection;
         }
 
         public bool Inactive()
@@ -23,14 +25,20 @@ namespace Features.Cubes
             return _inactive;
         }
 
-        public void ExecuteFrame()
+        public void Update()
         {
             if (_inactive)
                 return;
 
-            var status = _predicateCollection.Element(new CubeEquals(this));
-            if (status.Success)
-                InteractWith(status.Element);
+            var result = _collection.Element(new AndWithParameter<Cube>(new IPredicateWithParameter<Cube>[]
+            { 
+                new CubesEquals(this),
+                new NotWithParameter<Cube>(new CubesInactive(this))
+                
+            }));
+            
+            if (result.Success)
+                InteractWith(result.Content);
         }
 
         private void InteractWith(Cube cube)
@@ -44,7 +52,7 @@ namespace Features.Cubes
             _value += cube._value;
         }
 
-        public bool Equals(Cube content)
+        public bool Evaluate(Cube content)
         {
             return _value == content._value;
         }

@@ -1,8 +1,9 @@
 ﻿using System;
+using Update;
 
 namespace Features.Common
 {
-    public class Stopwatch
+    public class Stopwatch : IUpdate
     {
         private DateTime _lastUpdateTime;
         private DateTime _elapsedTime;

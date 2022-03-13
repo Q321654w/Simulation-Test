@@ -1,5 +1,6 @@
-﻿using Features.Collections;
+﻿using Collections;
 using Features.Interfaces;
+using Values;
 using Random = UnityEngine.Random;
 
 namespace Features.Cubes
@@ -7,19 +8,17 @@ namespace Features.Cubes
     public class CubeFactory : IFactory<Cube>
     {
         private readonly ICollection<Cube, Cube> _collection;
-        private readonly int _min;
-        private readonly int _max;
+        private readonly IRange<int> _range;
 
-        public CubeFactory(int min, int max, ICollection<Cube, Cube> collection)
+        public CubeFactory(ICollection<Cube, Cube> collection, IRange<int> range)
         {
-            _min = min;
-            _max = max;
             _collection = collection;
+            _range = range;
         }
 
         public Cube Create()
         {
-            var value = Random.Range(_min, _max);
+            var value = Random.Range(_range.Min(), _range.Max());
             return new Cube(value, _collection);
         }
     }

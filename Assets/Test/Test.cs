@@ -1,9 +1,10 @@
-using Features.Collections;
-using Features.Common;
+using Collections;
 using Features.Cubes;
 using Features.Interfaces;
 using Features.Simulation;
 using UnityEngine;
+using Update;
+using Values;
 
 namespace Test
 {
@@ -19,8 +20,8 @@ namespace Test
         private void Start()
         {
             _cubes = new DefaultCollection<Cube>(new DefaultCube());
-            var cubeFactory = new CubeFactory(_min, _max, _cubes);
-            _factory = new CubeProxy(cubeFactory, _cubes);
+            var cubeFactory = new CubeFactory(_cubes, new DefaultRange<int>(_min, _max));
+            _factory = new CubeFactoryProxy(cubeFactory, _cubes);
             _simulation = new UpdateSimulation<IUpdate>(_cubes, new DeltaTime());
         }
 

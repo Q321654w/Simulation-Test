@@ -1,9 +1,9 @@
-﻿using Features.Predicates;
+﻿using Predicate.WithParameter;
 
 namespace Features.Interfaces
 {
-    public interface IEquals<T>
+    public interface IEquals<T> : IPredicateWithParameter<T>
     {
-        bool Equals(T content);
+        new bool Evaluate(T content);
     }
 }
