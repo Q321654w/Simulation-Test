@@ -7,10 +7,10 @@ namespace Features.Cubes
 {
     public class CubeFactory : IFactory<Cube>
     {
-        private readonly ICollection<Cube, Cube> _collection;
+        private readonly IFind<Cube, Cube> _collection;
         private readonly IRange<int> _range;
 
-        public CubeFactory(ICollection<Cube, Cube> collection, IRange<int> range)
+        public CubeFactory(IFind<Cube, Cube> collection, IRange<int> range)
         {
             _collection = collection;
             _range = range;

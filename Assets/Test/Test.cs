@@ -1,4 +1,5 @@
 using Collections;
+using Collections.Implementations;
 using Features.Cubes;
 using Features.Interfaces;
 using Features.Simulation;
@@ -14,15 +15,16 @@ namespace Test
         [SerializeField] private int _max;
 
         private IFactory<Cube> _factory;
-        private DefaultCollection<Cube> _cubes;
+        private DefaultList<Cube> _cubes;
         private ISimulation _simulation;
 
         private void Start()
         {
-            _cubes = new DefaultCollection<Cube>(new DefaultCube());
+            _cubes = new DefaultList<Cube>(new DefaultCube());
             var cubeFactory = new CubeFactory(_cubes, new DefaultRange<int>(_min, _max));
             _factory = new CubeFactoryProxy(cubeFactory, _cubes);
-            _simulation = new UpdateSimulation<IUpdate>(_cubes, new DeltaTime());
+            _simulation = new UpdateSimulation<IUpdate>(_cubes,
+                new CacheBetweenUpdate<double>(new SecondsDeltaTime(new DeltaTime())));
         }
 
         private void Update()

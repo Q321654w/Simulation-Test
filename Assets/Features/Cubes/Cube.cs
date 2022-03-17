@@ -1,19 +1,21 @@
 ﻿using Collections;
-using Features.Interfaces;
+using Collections.Predicates.Common;
+using Collections.Predicates.WithParameter;
+using Collections.Predicates.WithParameter.Composites;
+using Collections.Predicates.WithParameter.Decorators;
 using Features.Predicates;
-using Predicate.WithParameter;
 using Update;
 
 namespace Features.Cubes
 {
-    public class Cube : IUpdate, IEquals<Cube>
+    public class Cube : IUpdate, IEqualsWithParameter<Cube>
     {
-        private readonly ICollection<Cube, Cube> _collection;
+        private readonly IFind<Cube, Cube> _collection;
 
         private int _value;
         private bool _inactive;
 
-        public Cube(int value, ICollection<Cube, Cube> collection)
+        public Cube(int value, IFind<Cube, Cube> collection)
         {
             _inactive = false;
             _value = value;
@@ -30,13 +32,12 @@ namespace Features.Cubes
             if (_inactive)
                 return;
 
-            var result = _collection.Element(new AndWithParameter<Cube>(new IPredicateWithParameter<Cube>[]
-            { 
+            var result = _collection.Find(new AndWithParameter<Cube>(new IPredicateWithParameter<Cube>[]
+            {
                 new CubesEquals(this),
                 new NotWithParameter<Cube>(new CubesInactive(this))
-                
             }));
-            
+
             if (result.Success)
                 InteractWith(result.Content);
         }
@@ -52,9 +53,9 @@ namespace Features.Cubes
             _value += cube._value;
         }
 
-        public bool Evaluate(Cube content)
+        public bool Equals(Cube source)
         {
-            return _value == content._value;
+            return _value == source._value;
         }
 
         public override string ToString()

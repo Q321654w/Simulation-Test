@@ -1,4 +1,4 @@
-﻿using Collections;
+﻿using Collections.Defaults;
 
 namespace Features.Cubes
 {

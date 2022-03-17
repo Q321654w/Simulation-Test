@@ -1,5 +1,5 @@
-﻿using Features.Cubes;
-using Predicate.WithParameter;
+﻿using Collections.Predicates.WithParameter;
+using Features.Cubes;
 
 namespace Features.Predicates
 {
