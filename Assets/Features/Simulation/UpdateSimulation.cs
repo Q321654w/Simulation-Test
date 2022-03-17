@@ -17,8 +17,9 @@ namespace Features.Simulation
         public void Simulate()
         {
             _deltaTime.Update();
-
-            for (var index = 0; index < _iterate.Count(); index++)
+            var count = _iterate.Count().Evaluate();
+            
+            for (var index = 0; index < count; index++)
             {
                 _iterate.Element(index);
             }

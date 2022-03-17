@@ -11,7 +11,7 @@ namespace Features.Cubes
             _value = new Cube(0, null);
         }
 
-        public Cube Value()
+        public Cube Evaluate()
         {
             return _value;
         }
